@@ -1,0 +1,134 @@
+{% extends 'landingpage/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  body {
+    background-color: #ffffff !important;
+  }
+
+  .landing-cards-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .landing-col-card {
+    flex: 1 1 calc(33.333% - 1.5rem);
+    display: flex;
+  }
+
+  .landing-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 16px;
+  }
+
+  .landing-card-header-img {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .landing-card-header-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .landing-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: 12px;
+  }
+
+  .landing-card-description {
+    color: #34495e;
+    font-size: 14px;
+    margin-top: 8px;
+    flex: 1;
+  }
+
+  .btn-outline-primary {
+    margin-top: auto;
+    font-weight: bold;
+  }
+
+  .author {
+    font-size: 13px;
+    color: #888;
+  }
+</style>
+
+<div class="card card-body border-0 shadow-none bg-white px-4 pt-5">
+
+  <!-- DETAIL ARTIKEL -->
+  <section class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 ms-auto me-auto">
+          <h6 class="text-uppercase text-sm text-muted fw-bold mb-2">{{ artikel.kategori }}</h6>
+          {% if artikel.gambar %}
+          <img src="{{ artikel.gambar.url }}" alt="{{ artikel.judul }}" class="img-fluid rounded mb-3" />
+          {% endif %}
+          <h3 class="title mb-3">{{ artikel.judul }}</h3>
+          <div class="text-dark mb-2">{{ artikel.isi|safe }}</div>
+          <div class="text-muted fst-italic">{{ artikel.created_at }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTIKEL LAINNYA -->
+  <section class="pt-5 pb-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-9 text-center mx-auto">
+          <h3 class="mb-4">Lihat artikel lainnya</h3>
+        </div>
+      </div>
+
+      <div class="landing-cards-row">
+        {% for item in artikel_lainya %}
+        <div class="landing-col-card">
+          <div class="landing-card">
+            <div class="landing-card-header-img">
+              <a href="{% url 'detail_artikel' item.id %}">
+                <img src="{{ item.gambar.url }}" alt="{{ item.judul }}">
+              </a>
+            </div>
+            <div class="landing-card-body">
+              <span class="text-uppercase text-xs fw-bold text-info mb-1">{{ item.kategori }}</span>
+              <a href="{% url 'detail_artikel' item.id %}" class="h5 text-dark fw-bold d-block mb-2">
+                {{ item.judul }}
+              </a>
+              <div class="landing-card-description mb-3">
+                {{ item.isi|striptags|truncatechars:200 }}
+              </div>
+              <a href="{% url 'detail_artikel' item.id %}" class="btn btn-outline-primary btn-sm">
+                BACA SELENGKAPNYA
+              </a>
+              <div class="author mt-3 d-flex align-items-center">
+                <img src="{% static 'landingpage/assets/img/ivana-squares.jpg' %}" alt="Author"
+                     class="avatar shadow-sm rounded-circle" width="32" height="32">
+                <div class="ps-2">
+                  <div>{{ item.created_by }}</div>
+                  <small>{{ item.created_at }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}
