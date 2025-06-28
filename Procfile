@@ -1,1 +1,1 @@
-web: gunicorn tugasku.wsgi:application --bind 0.0.0.0:$PORT
+web: python manage.py collectstatic --noinput && python manage.py migrate && gunicorn tugasku.wsgi:application --bind 0.0.0.0:$PORT
