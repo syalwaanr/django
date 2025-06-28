@@ -6,7 +6,7 @@ from .models import ArtikelBlog, Kategori, Komentar
 
 # ✅ Custom Form untuk Artikel dengan CKEditor
 class ArtikelForms(forms.ModelForm):
-    isi = forms.CharField(widget=CKEditorWidget())
+    isi = forms.CharField(widget=CKEditor5Widget())
 
     class Meta:
         model = ArtikelBlog
