@@ -20,6 +20,8 @@ ALLOWED_HOSTS = [
     'django-production-c672.up.railway.app',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://django-production-c672.up.railway.app',]
+
 # Application definition
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
