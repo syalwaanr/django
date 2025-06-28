@@ -18,7 +18,7 @@ from artikel.views import (
 
 urlpatterns = [
     # Halaman utama dashboard
-    path('', dashboard, name='dashboard'),
+    path('dashboard/', dashboard, name='dashboard'),
 
     # CRUD Kategori
     path('kategori/list/', admin_kategori_list, name='admin_kategori_list'),

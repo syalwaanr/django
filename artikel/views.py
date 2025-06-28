@@ -13,6 +13,7 @@ def home(request):
         'kategori': kategori
     })
 
+
 def detail_artikel(request, id):
     artikel = get_object_or_404(ArtikelBlog, id=id)
     artikel_lainya = ArtikelBlog.objects.exclude(id=id)[:3]

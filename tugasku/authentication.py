@@ -46,10 +46,10 @@ def registrasi(request):
                 else:
                     user = User.objects.create_user(
                         username=username,
+                        password=password1,
                         first_name=nama_depan,
                         last_name=nama_belakang, 
                     )
-                    user.set_password(password1)
                     user.save()
                     return redirect("/")
 
